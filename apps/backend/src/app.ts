@@ -6,6 +6,7 @@ import { json } from 'body-parser';
 import { errorHandler } from './middleware/errorHandler';
 import authRoutes from './routes/auth';
 import wardrobeRoutes from './routes/wardrobe';
+import outfitRoutes from './routes/outfits';
 import { authenticate } from './middleware/auth';
 
 const app = express();
@@ -15,10 +16,11 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(json({ limit: '10mb' }));
 
-app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+app.get('/health', (_req, res) => res.json({ status: 'ok', version: '1.0.0' }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/wardrobe', authenticate, wardrobeRoutes);
+app.use('/api/outfits', authenticate, outfitRoutes);
 
 app.use(errorHandler);
 
