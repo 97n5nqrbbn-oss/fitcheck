@@ -1,0 +1,19 @@
+{
+  "name": "fitcheck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-powered outfit confidence app",
+  "workspaces": [
+    "apps/backend",
+    "apps/mobile"
+  ],
+  "scripts": {
+    "backend": "npm run dev --workspace=apps/backend",
+    "mobile": "npm run start --workspace=apps/mobile",
+    "dev": "concurrently \"npm run backend\" \"npm run mobile\"",
+    "build:backend": "npm run build --workspace=apps/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
