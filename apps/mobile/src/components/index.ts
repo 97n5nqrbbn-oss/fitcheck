@@ -5,3 +5,5 @@ export { LoadingOverlay } from './LoadingOverlay';
 export { EmptyState } from './EmptyState';
 export { Button } from './ui/Button';
 export { Card } from './ui/Card';
+export { Avatar } from './ui/Avatar';
+export { Input } from './ui/Input';
