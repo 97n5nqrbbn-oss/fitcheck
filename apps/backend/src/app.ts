@@ -7,6 +7,7 @@ import { errorHandler } from './middleware/errorHandler';
 import authRoutes from './routes/auth';
 import wardrobeRoutes from './routes/wardrobe';
 import outfitRoutes from './routes/outfits';
+import userRoutes from './routes/users';
 import { authenticate } from './middleware/auth';
 
 const app = express();
@@ -21,6 +22,7 @@ app.get('/health', (_req, res) => res.json({ status: 'ok', version: '1.0.0' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/wardrobe', authenticate, wardrobeRoutes);
 app.use('/api/outfits', authenticate, outfitRoutes);
+app.use('/api/users', authenticate, userRoutes);
 
 app.use(errorHandler);
 
