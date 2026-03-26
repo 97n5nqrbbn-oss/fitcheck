@@ -5,3 +5,5 @@ export { EmptyState } from './EmptyState';
 export { GarmentCard } from './GarmentCard';
 export { LoadingOverlay } from './LoadingOverlay';
 export { OutfitCard } from './OutfitCard';
+export { Avatar } from './Avatar';
+export { Input } from './Input';
