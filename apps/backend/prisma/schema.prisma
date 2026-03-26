@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String         @id @default(cuid())
+  email                String         @unique
+  passwordHash         String
+  name                 String
+  styleGoals           String[]
+  lifestyle            String[]
+  bodyType             String?
+  confidencePainPoints String[]
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  garments             Garment[]
+  outfits              Outfit[]
+  feedbacks            Feedback[]
+  refreshTokens        RefreshToken[]
+}
+
+model Garment {
+  id            String       @id @default(cuid())
+  userId        String
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name          String
+  category      String
+  color         String
+  formality     String
+  season        String[]
+  tags          String[]
+  imageUrl      String
+  imagePublicId String
+  notes         String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  outfitItems   OutfitItem[]
+}
+
+model Outfit {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String?
+  occasion    String
+  season      String
+  aiReasoning String
+  aiTip       String
+  createdAt   DateTime     @default(now())
+  items       OutfitItem[]
+  feedbacks   Feedback[]
+}
+
+model OutfitItem {
+  id        String  @id @default(cuid())
+  outfitId  String
+  outfit    Outfit  @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+  garmentId String
+  garment   Garment @relation(fields: [garmentId], references: [id], onDelete: Cascade)
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  outfitId  String
+  outfit    Outfit   @relation(fields: [outfitId], references: [id], onDelete: Cascade)
+  rating    String
+  formality Int?
+  vibe      Int?
+  createdAt DateTime @default(now())
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
