@@ -12,6 +12,10 @@ model User {
   email                String         @unique
   passwordHash         String
   name                 String
+  username        String   @unique
+  avatarUrl        String?
+  bio              String?
+  colorSeason      String?
   styleGoals           String[]
   lifestyle            String[]
   bodyType             String?
