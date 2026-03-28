@@ -57,3 +57,12 @@ export async function updateUserProfile(userId: string, data: Partial<{
 }>) {
   return prisma.user.update({ where: { id: userId }, data });
 }
+
+export async function logoutUser(refreshToken: string) {
+  await prisma.refreshToken.deleteMany({ where: { token: refreshToken } });
+}
+
+export async function deleteAccount(userId: string) {
+  await prisma.refreshToken.deleteMany({ where: { userId } });
+  await prisma.user.delete({ where: { id: userId } });
+}
