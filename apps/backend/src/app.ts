@@ -8,6 +8,7 @@ import authRoutes from './routes/auth';
 import wardrobeRoutes from './routes/wardrobe';
 import outfitRoutes from './routes/outfits';
 import userRoutes from './routes/users';
+import styleProfileRoutes from './routes/styleProfile';
 import { authenticate } from './middleware/auth';
 
 const app = express();
@@ -23,6 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/wardrobe', authenticate, wardrobeRoutes);
 app.use('/api/outfits', authenticate, outfitRoutes);
 app.use('/api/users', authenticate, userRoutes);
+app.use('/api/style-profile', authenticate, styleProfileRoutes);
 
 app.use(errorHandler);
 
